@@ -6,7 +6,6 @@ import fYDrawing.common.Size;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;

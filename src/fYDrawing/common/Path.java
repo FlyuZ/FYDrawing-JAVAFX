@@ -1,5 +1,11 @@
 package fYDrawing.common;
 
+/**
+* @see Path
+* @see #定义所有图标路径
+* @version 1.0
+* @author Flyuz
+*/
 public class Path {
 	public static final String LOGO = "./fYDrawing/icon/logo.png";
 	public static final String PEN = "./fYDrawing/icon/pen.png";
@@ -15,5 +21,5 @@ public class Path {
 	public static final String RUBBER_CURSOR_8 = "./fYDrawing/icon/rubberCursor_8.png";
 	public static final String RUBBER_CURSOR_12 = "./fYDrawing/icon/rubberCursor_12.png";
 	public static final String RUBBER_CURSOR_16 = "./fYDrawing/icon/rubberCursor_16.png";
-	public static final String STYLE_CSS = "./fYDrawing/css/windows.css";
+    //public static final String STYLE_CSS = "./fYDrawing/css/windows.css";
 }

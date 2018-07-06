@@ -15,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
-public class ToolBar {
+public class ToolBar{
 
 	private TilePane tpToolBtn;
 	private List<MyButton> toolButton = new ArrayList<MyButton>();
