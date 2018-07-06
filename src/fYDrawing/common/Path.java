@@ -21,5 +21,4 @@ public class Path {
 	public static final String RUBBER_CURSOR_8 = "./fYDrawing/icon/rubberCursor_8.png";
 	public static final String RUBBER_CURSOR_12 = "./fYDrawing/icon/rubberCursor_12.png";
 	public static final String RUBBER_CURSOR_16 = "./fYDrawing/icon/rubberCursor_16.png";
-    //public static final String STYLE_CSS = "./fYDrawing/css/windows.css";
 }

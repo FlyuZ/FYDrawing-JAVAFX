@@ -1,5 +1,6 @@
 package fYDrawing.shape;
 
+import fYDrawing.stage.Shape;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -10,8 +11,11 @@ public class Shapes2D {
 	
     public void setCanvas(Canvas c, Color color, boolean f){
         gc = c.getGraphicsContext2D();
-        gc.setStroke(color);
         fill = f;
+        if(fill == false)
+            gc.setStroke(color);
+        else 
+        	gc.setFill(color);
     }
 
     public void drawLine(double x2, double y2) {
@@ -63,5 +67,8 @@ public class Shapes2D {
             gc.fillRoundRect(x1, y1, width, height, 30, 30);
         else
         	gc.strokeRoundRect(x1, y1, width, height, 30, 30);
+    }
+    public void drawFillCanvas(double w, double h){
+    	gc.fillRect(0, 0, w, h);
     }
 }

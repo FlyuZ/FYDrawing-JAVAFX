@@ -2,12 +2,14 @@ package fYDrawing.stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import fYDrawing.common.Path;
 import fYDrawing.common.Size;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -115,12 +117,23 @@ public class ToolBar{
 				Shape.resetToolName(name);
 				if (name == "TEXT") {
 					detailPanel.setFont();
-				}else if(name == "RUBBER"){
+				}else if(name == "RUBBER" || name == "LINE" || name == "PEN"){
 					detailPanel.setRubber();
+					
 				}else if(name == "BARREL"){
 					detailPanel.clear();
 				}else{
 					detailPanel.setLine();
+				}
+				if (name == "TEXT"){
+					TextInputDialog dialog = new TextInputDialog("");
+					dialog.setTitle("文本输入框");
+					dialog.setContentText("请输入");
+					dialog.setHeaderText("修改字体后，直接在画布点击");
+					Optional<String> result = dialog.showAndWait();
+					if (result.isPresent()){
+					    Shape.resetText(result.get());
+					}
 				}
 			});
 		}

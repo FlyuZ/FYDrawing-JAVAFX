@@ -32,7 +32,7 @@ public class DetailPanel {
 			fontSizeItems.add(i);
 		}
 		fontSize.setItems(fontSizeItems);
-		fontSize.getSelectionModel().select(2);
+		fontSize.getSelectionModel().select(0);
 		fontSize.valueProperty().addListener((ov, oldv, newv) -> {
 			Shape.resetFontSize(Integer.valueOf(newv));
 		});
@@ -57,7 +57,7 @@ public class DetailPanel {
 		lineSize.setStyle("-fx-base:#888888;-fx-background-color:#666666;");
 		lineSize.setPrefWidth(Size.DETAIL_WIDTH);
 		lineSize.setItems(lineSizeItems);
-		lineSize.getSelectionModel().select(2);
+		lineSize.getSelectionModel().select(0);
 		lineSize.valueProperty().addListener((ov, oldv, newv) -> {
 			Shape.resetLineSize(newv);
 		});
@@ -69,7 +69,7 @@ public class DetailPanel {
 		rubberSize.setStyle("-fx-base:#888888;-fx-background-color:#666666;");
 		rubberSize.setPrefWidth(Size.DETAIL_WIDTH);
 		rubberSize.setItems(rubberSizeItems);
-		rubberSize.getSelectionModel().select(2);
+		rubberSize.getSelectionModel().select(0);
 		rubberSize.valueProperty().addListener((ov, oldv, newv) -> {
 			Shape.resetRubberSize(Integer.valueOf(newv));
 		});
@@ -81,21 +81,44 @@ public class DetailPanel {
 		zero2.setStyle("-fx-base:#888888;-fx-background-color:#666666;");
 		zero2.setPrefWidth(Size.DETAIL_WIDTH);
 	}
+	
+	public ComboBox<String> getLine(){
+		return lineSize;
+	}
+	public ComboBox<Integer> getFontSize(){
+		return fontSize;
+	}
+	
+	public ComboBox<Integer> getRubber(){
+		return rubberSize;
+	}
+	
+	public ComboBox<String> getFontFamily(){
+		return fontFamily;
+	}
 
 	public void setLine() {
 		content.getChildren().clear();
+		lineSize.getSelectionModel().select(0);
+		Shape.resetLineSize("1");
 		content.getChildren().add(lineSize);
 		content.getChildren().add(zero1);
 	}
 
 	public void  setFont() {
 		content.getChildren().clear();
+		fontFamily.getSelectionModel().select(0);
+		fontSize.getSelectionModel().select(0);
+		Shape.resetFontFamily("AIGDT");
+		Shape.resetFontSize(8);
 		content.getChildren().add(fontSize);
 		content.getChildren().add(fontFamily);
 	}
 
 	public void  setRubber() {
 		content.getChildren().clear();
+		rubberSize.getSelectionModel().select(0);
+		Shape.resetRubberSize(1);
 		content.getChildren().add(rubberSize);
 		content.getChildren().add(zero1);
 	}

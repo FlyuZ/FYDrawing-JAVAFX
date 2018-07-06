@@ -1,10 +1,10 @@
 package fYDrawing.stage;
 
-import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 
 
 public interface MyText {
-	public static Text curLocation = new Text("");
+	public static Label curLocation = new Label("");
 	
 	public static void setText(String text){
 		curLocation.setText(text);

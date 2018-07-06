@@ -5,12 +5,14 @@ import java.util.List;
 
 import fYDrawing.common.Size;
 import fYDrawing.shape.Shapes2D;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class Board {
 	private Group content;
@@ -39,6 +41,7 @@ public class Board {
 		content = new Group();
 		vbox = new VBox();
 		vbox.setAlignment(Pos.CENTER);
+		vbox.setPadding(new Insets(10, 25, 0, 0));
 		vbox.getChildren().add(content);
 		drawingCanvas = new Canvas(Size.CANVAS_WIDTH, Size.CANVAS_HEIGHT);
 		gc = drawingCanvas.getGraphicsContext2D();
@@ -56,7 +59,7 @@ public class Board {
 
 	private void handleDrawingCanvas() {
 		drawingCanvas.setOnMouseMoved(event -> {
-			MyText.setText(String.format("%.1f, %.1fpx", event.getX(), event.getY()));
+			MyText.setText(String.format("%.1f, %.1fpx ", event.getX(), event.getY()));
 		});
 		drawingCanvas.setOnMouseExited(event -> {
 			MyText.setText("");
@@ -65,23 +68,32 @@ public class Board {
 			Canvas c = new Canvas(drawingCanvasWidth, drawingCanvasHeight);
 			gc = c.getGraphicsContext2D();
 
-			if (Shape.toolName == "PEN" || Shape.toolName == "LINE" || Shape.toolName == "RUBBER"
-					|| Shape.toolName == "OVAL" || Shape.toolName == "RECTANGLEZ" || Shape.toolName == "RECTANGLEY") {
-				c.setOnMousePressed(drawingCanvas.getOnMousePressed());
-				c.setOnMouseDragged(drawingCanvas.getOnMouseDragged());
-				c.setOnMouseReleased(drawingCanvas.getOnMouseReleased());
-				c.setOnMouseMoved(drawingCanvas.getOnMouseMoved());
-				c.setOnMouseExited(drawingCanvas.getOnMouseExited());
-
-				if (Shape.lineSize != "野割")
+			c.setOnMousePressed(drawingCanvas.getOnMousePressed());
+			c.setOnMouseDragged(drawingCanvas.getOnMouseDragged());
+			c.setOnMouseReleased(drawingCanvas.getOnMouseReleased());
+			c.setOnMouseMoved(drawingCanvas.getOnMouseMoved());
+			c.setOnMouseExited(drawingCanvas.getOnMouseExited());
+			if (Shape.toolName == "OVAL" || Shape.toolName == "RECTANGLEZ" || Shape.toolName == "RECTANGLEY") {
+				if (Shape.lineSize != "野割") {
 					gc.setLineWidth(Integer.valueOf(Shape.lineSize));
-			}
-			if (Shape.lineSize == "野割")
+					shapeDrawer.setCanvas(c, Shape.color, false);
+				} else if (Shape.lineSize == "野割") {
+					shapeDrawer.setCanvas(c, Shape.color, true);
+				}
+			}else if(Shape.toolName == "BARREL"){
 				shapeDrawer.setCanvas(c, Shape.color, true);
-			else if (Shape.toolName == "RUBBER")
-				shapeDrawer.setCanvas(c, Color.WHITE, false);
-			else
+			}else{
+				gc.setLineWidth(Shape.rubberSize);
 				shapeDrawer.setCanvas(c, Shape.color, false);
+			}
+
+			if (Shape.toolName == "RUBBER")
+				gc.setStroke(Color.WHITE);
+			if(Shape.toolName == "TEXT"){
+				gc.setFont(Font.font(Shape.fontFamily, Shape.fontSize));
+				gc.setFill(Shape.color);
+				gc.strokeText(Shape.Text, event.getX(), event.getY());
+			}
 
 			try {
 				if (listCanvas.contains(listCanvas.get(++counter))) {
@@ -110,8 +122,6 @@ public class Board {
 		drawingCanvas.setOnMouseReleased(event -> {
 			x2 = event.getX();
 			y2 = event.getY();
-			if (x1 == x2 && y1 == y2)
-				return;
 			double width = x2 - x1;
 			double height = y2 - y1;
 			if (Shape.toolName == "LINE") {
@@ -122,7 +132,10 @@ public class Board {
 				shapeDrawer.drawRectangle(x1, y1, width, height);
 			} else if (Shape.toolName == "RECTANGLEY") {
 				shapeDrawer.drawRoundRectangle(x1, y1, width, height);
+			} else if (Shape.toolName == "BARREL") {
+				shapeDrawer.drawFillCanvas(drawingCanvasWidth, drawingCanvasHeight);
 			}
+			gc.stroke();
 		});
 	}
 

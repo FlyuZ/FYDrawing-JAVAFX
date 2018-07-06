@@ -9,7 +9,7 @@ public class Shape {
 	public static int fontSize = 12;
 	public static String fontFamily = "AIGDT";
 	public static Color color = Color.BLACK;
-	
+	public static String Text = "";
 	static void resetToolName(String name){
 		Shape.toolName = name;
 	}
@@ -27,5 +27,8 @@ public class Shape {
 	}
 	static void resetColor(Color c){
 		Shape.color = c;
+	}
+	static void resetText(String s){
+		Shape.Text = s;
 	}
 }
