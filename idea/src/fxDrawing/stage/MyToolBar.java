@@ -18,7 +18,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 /**
  * @see MyToolBar
- * @see# 工具栏，VBox布局，里面包括三个部分，工具选择区，颜色选择区，细节选择区。
+ * 工具栏，VBox布局，里面包括三个部分，工具选择区，颜色选择区，细节选择区。
  * @version 1.0
  * @author Flyuz
  */

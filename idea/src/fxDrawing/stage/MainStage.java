@@ -7,7 +7,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * @see MainStage
+ * 主界面类，继承Stage，布局为BorderPane，创建菜单栏，工具栏，状态栏和画布
+ * @version 1.0
+ * @author Flyuz
+ */
 public class MainStage extends Stage {
     private Group root;
     private BorderPane content;
@@ -18,7 +23,6 @@ public class MainStage extends Stage {
         content = new BorderPane();
 
         setScene(new Scene(root, Color.web("#949494")));
-        //setScene(new Scene(root, Color.web("#A9A9A9")));
         setTitle("画图");
         setResizable(true);
         getIcons().add(new Image(Path.LOGO));
@@ -39,7 +43,6 @@ public class MainStage extends Stage {
         content.setRight(board.getCanvas());
 
         StatusBar statusBar = new StatusBar();
-        //statusBar.getStatusBar().prefWidthProperty().bind(this.widthProperty());
         content.setBottom(statusBar.getStatusBar());
     }
     public Board getBoard() {

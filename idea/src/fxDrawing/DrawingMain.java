@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 /**
  * @see DrawingMain
- * @see #程序入口
+ * 程序入口
  * @version 1.0
  * @author Flyuz
  */

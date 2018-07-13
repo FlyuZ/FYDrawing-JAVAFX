@@ -1,5 +1,7 @@
 package fxDrawing.stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 import fxDrawing.shape.FileSaver;
@@ -14,11 +16,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
 
 /**
  * @see MyMenuBar
- * @see# 菜单栏
+ * 菜单栏
  * @version 1.0
  * @author Flyuz
  */
@@ -36,23 +39,19 @@ public class MyMenuBar {
         this.mainStage = mainStage;
         initUI();
     }
-    /**
-     * @see initUI
-     * @see #初始化菜单栏，菜单项
-     * @version 1.0
-     * @author Flyuz
-     */
+
     private void initUI() {
         menubar = new MenuBar();
 
         file = new Menu();
         file.setText("文件");
         file.setStyle("-fx-font-size:14;");
-
+/*
+//打开功能暂时废弃
         miOpen = new MenuItem();
         miOpen.setText("打开");
         miOpen.setStyle("-fx-font-size:14;");
-/*		miOpen.setOnAction((ActionEvent t) -> {
+		miOpen.setOnAction((ActionEvent t) -> {
 			//打开
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image", "*.png", "*.jpg", "*.jpeg"));
@@ -66,17 +65,20 @@ public class MyMenuBar {
 					System.out.println(ex.getMessage());
 				}
 			}
-		});*/
+		});
+*/
 
         miSave = new MenuItem();
         miSave.setText("保存");
         miSave.setStyle("-fx-font-size:14;");
         miSave.setAccelerator(KeyCombination.keyCombination("Ctrl+s"));
         miSave.setOnAction((ActionEvent t) -> {
-            List<Canvas> list = mainStage.getBoard().getList();
-            FileSaver fileSaver = new FileSaver(list, mainStage.getBoard().getW(), mainStage.getBoard().getH());
+            List<Canvas> saveList = mainStage.getBoard().getList();
+            FileSaver fileSaver = new FileSaver(saveList, mainStage.getBoard().getW(), mainStage.getBoard().getH());
             fileSaver.saveToFile();
-
+            fileSaver = null;
+            saveList = null;
+            System.gc();
         });
 
         miClose = new MenuItem();
@@ -85,7 +87,7 @@ public class MyMenuBar {
         miClose.setOnAction((ActionEvent t) -> {
             Platform.exit();
         });
-        file.getItems().add(miOpen);
+        //file.getItems().add(miOpen);
         file.getItems().add(miSave);
         file.getItems().add(miClose);
 
@@ -117,7 +119,7 @@ public class MyMenuBar {
         miAbout.setOnAction((ActionEvent t) -> {
             Alert aboutAlert = new Alert(AlertType.INFORMATION);
             aboutAlert.setTitle("关于画图");
-            aboutAlert.setHeaderText("欢迎使用FY画图软件");
+            aboutAlert.setHeaderText("欢迎使用FX画图软件");
             aboutAlert.initStyle(StageStyle.UTILITY);
             aboutAlert.setContentText("版本：\n"
                     + "开发者：Flyuz\n"

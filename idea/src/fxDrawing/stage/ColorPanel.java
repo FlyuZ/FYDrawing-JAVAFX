@@ -13,13 +13,19 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+/**
+ * @see ColorPanel
+ * 颜色选择工具，布局为VBox，包括两个部分，上面为颜色选择器，下面为快捷颜色选择区
+ * @version 1.0
+ * @author Flyuz
+ */
 public class ColorPanel {
     private VBox content;
     private TilePane tilePane;
     private  Color presentColor = Color.BLACK;
     private  ColorPicker colorPicker = new ColorPicker();
     private List<MyButton> colorButton = new ArrayList<MyButton>();
-    private String[] color = {"#ffffff" , "#000000", "#848683", "#c4c3be", "#cdbedb", "#b97b56",
+    private String[] color = {"#ffffff", "#000000", "#848683", "#c4c3be", "#cdbedb", "#b97b56",
             "#ffadd6", "#f01e1f", "#89010d", "#fef007", "#ffc80c", "#ff7c26",
             "#efe2ab", "#b6e51d", "#24b04f", "#93dceb", "#6997bb", "#07a0e6",
             "#d9a2dc", "#9c4ca1","#3b46e0"};

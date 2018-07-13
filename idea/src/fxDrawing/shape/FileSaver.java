@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @see FileSaver
- * @see# 生成文件选择器，保存文件
+ * 生成文件选择器，保存文件
  * @version 1.0
  * @author Flyuz
  */
@@ -36,7 +36,9 @@ public class FileSaver {
             canvasHeigth = (int) list.get(list.size() - 1).getHeight();
         }
     }
-
+    /**
+     * 生成文件选择器，调用生成器将图层转化为image写入文件
+     */
     public void saveToFile() {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG", "*.png"));
@@ -45,30 +47,31 @@ public class FileSaver {
         String type = "PNG";
 
         try {
-            Canvas canvas = createCanvas(this.list);
+            Canvas myCanvas = createCanvas(this.list);
             WritableImage writableImage = new WritableImage(canvasWidth, canvasHeigth);
-            canvas.snapshot(null, writableImage);
+            myCanvas.snapshot(null, writableImage);
             RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-            if(img != null)
+            if(img != null) {
                 ImageIO.write(renderedImage, type, img);
-
+            }
+            img = null;
+            myCanvas = null;
         } catch (IOException ignored) {
         }
     }
     /**
      * 画布生成器，将所有图层合并成一个canvas
-     * @param list 所有图层
-     * @retuen canvas
-     * @author Flyuz
+     * @param list 传入所有图层
+     * @return canvas
      */
     private Canvas createCanvas(List<Canvas> list) {
-        Canvas canvas = new Canvas(list.get(list.size() - 1).getWidth(), list.get(list.size() - 1).getHeight());
+        Canvas tempCanvas = new Canvas(canvasWidth, canvasHeigth);
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(Color.TRANSPARENT);
         for (Canvas aList : list) {
             WritableImage image = aList.snapshot(params, null);
-            canvas.getGraphicsContext2D().drawImage(image, 0, 0);
+            tempCanvas.getGraphicsContext2D().drawImage(image, 0, 0);
         }
-        return canvas;
+        return tempCanvas;
     }
 }

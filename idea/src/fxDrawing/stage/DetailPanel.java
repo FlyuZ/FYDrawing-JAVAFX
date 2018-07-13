@@ -8,7 +8,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-
+/**
+ * @see DetailPanel
+ * 细节选择工具，设置线条粗细，设置字体字号等
+ * @version 1.0
+ * @author Flyuz
+ */
 public class DetailPanel {
     private VBox content;
     private ComboBox<Integer> fontSize;
@@ -89,11 +94,9 @@ public class DetailPanel {
     public ComboBox<Integer> getFontSize(){
         return fontSize;
     }
-
     public ComboBox<Integer> getRubber(){
         return rubberSize;
     }
-
     public ComboBox<String> getFontFamily(){
         return fontFamily;
     }

@@ -4,18 +4,18 @@ import javafx.scene.paint.Color;
 
 /**
  * @see Shape
- * @see# 当前图形类
+ * 当前图形类，纪录当前图形需要的属性
  * @version 1.0
  * @author Flyuz
  */
 public class Shape {
-    public static String toolName = "PEN";
-    public static String lineSize = "7";
-    public static int rubberSize = 7;
-    public static int fontSize = 12;
-    public static String fontFamily = "AIGDT";
-    public static Color color = Color.BLACK;
-    public static String Text = "";
+    static String toolName = "PEN";
+    static String lineSize = "7";
+    static int rubberSize = 7;
+    static int fontSize = 12;
+    static String fontFamily = "AIGDT";
+    static Color color = Color.BLACK;
+    static String Text = "";
     static void resetToolName(String name){
         Shape.toolName = name;
     }
